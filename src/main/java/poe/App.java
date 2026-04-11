@@ -37,7 +37,7 @@ public class App
     String cellPhone = input.nextLine();
 
     //Validate cell phone number
-    if (cellPhone.startsWith("+27") && cellPhone.length() == 12 && cellPhone.matches("\\+27\\d{9}")) {
+    if (cellPhone.matches("\\+27\\d{9}")) {
         System.out.println("Cell phone number successfully captured.");
     } else {
         System.out.println("Cell phone number is not correctly formatted; please ensure that it starts with +27 and is exactly twelve characters long.");
