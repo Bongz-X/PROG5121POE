@@ -1,7 +1,7 @@
 package poe;
 import java.util.Scanner;
 
-public class App 
+public class App
 {
     public static void main( String[] args )
     {
@@ -38,9 +38,9 @@ public class App
 
     //Validate cell phone number
     if (cellPhone.matches("\\+27\\d{9}")) {
-        System.out.println("Cell phone number successfully captured.");
+        System.out.println("Cell phone number successfully added.");
     } else {
-        System.out.println("Cell phone number is not correctly formatted; please ensure that it starts with +27 and is exactly twelve characters long.");
+        System.out.println("Cell phone number incorrectly formatted or does not contain international code.");
     }
   }
 }
