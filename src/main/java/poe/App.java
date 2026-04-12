@@ -65,7 +65,7 @@ public class App
 
     //Validate login details
     if (login.loginUser(enteredUsername, enteredPassword, enteredCellPhone)){
-        System.out.println("Welcome back, " + enteredUsername + "!");
+        System.out.println("Welcome back, " + enteredUsername + "!It is great to see you again.");
     } else {
         System.out.println("Login failed. Please check your username, password, and cell phone number and try again.");
     }
