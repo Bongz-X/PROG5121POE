@@ -33,7 +33,7 @@ public class App
     }
 
     //Prompt user to enter SA cell phone no
-    System.out.println("Please enter your SA cell phone number (Must start with +27 and be 12 characters long) ");
+    System.out.println("Please enter your SA cell phone number (Must start with +27 and be 10 characters long) ");
     String cellPhone = input.nextLine();
 
     //Validate cell phone number
