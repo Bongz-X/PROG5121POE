@@ -6,6 +6,8 @@ public class App
     public static void main( String[] args )
     {
 
+    //Registration of User Details
+    
     //Scanner to allow user input
     Scanner input = new Scanner(System.in);
 
@@ -42,5 +44,31 @@ public class App
     } else {
         System.out.println("Cell phone number incorrectly formatted or does not contain international code.");
     }
+    
+    //Login Phase
+
+    //Storing login details in login object
+    Login login = new Login(username, password, cellPhone);
+
+    System.out.println("--- LOGIN ---");
+
+    //User Logging In 
+    System.out.println("Please enter your username:");
+    String loginUsername = input.nextLine();
+
+    System.out.println("Please enter your password:");
+    String loginPassword = input.nextLine();
+
+    System.out.println("Please enter your cell phone number:");
+    String loginCellPhone = input.nextLine();
+
+    //Checking authentication of details
+    boolean isAuthenticated = login.authenticate(loginUsername, loginPassword, loginCellPhone);
+
+    //Validating login details
+    while (!isAuthenticated && attempts > 0){
+        System.out.println("")
+    }
+
   }
 }
