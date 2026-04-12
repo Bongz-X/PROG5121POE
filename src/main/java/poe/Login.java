@@ -3,9 +3,9 @@ package poe;
 //Storing Login details of user
 public class Login {
     
-    private String StoredUsername;
-    private String StoredPassword;
-    private String StoredCellPhone;
+    private final String StoredUsername;
+    private final String StoredPassword;
+    private final String StoredCellPhone;
 
     //Constructor for Login
     public Login(String username, String password, String cellPhone) {
@@ -55,9 +55,6 @@ public class Login {
 
     //Login check
     public boolean loginUser(String enteredUsername, String enteredPassword, String enteredCellPhone){
-        if (enteredUsername.equals(StoredUsername) && enteredPassword.equals(StoredPassword) && enteredCellPhone.equals(StoredCellPhone)){
-            return true;
-        }
-        return false;
+        return enteredUsername.equals(StoredUsername) && enteredPassword.equals(StoredPassword) && enteredCellPhone.equals(StoredCellPhone);
     }
 }
