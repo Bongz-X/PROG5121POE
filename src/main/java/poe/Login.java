@@ -15,23 +15,49 @@ public class Login {
     }
     
     //Username Validation
-   public boolean CheckUsername(){
-    if (username.contains("_") && username.length() <= 5) {
-        return true;
-    } else {
+    public boolean CheckUsername(){
+        if (StoredUsername.contains("_") && StoredUsername.length() <= 5) {
+            return true;
+        }
         return false;
     }
-   }
 
-   //Password Validation
+    //Password Validation
     public boolean CheckPassword(){
-     if (password.length() <= 8 && password.matches(".*[A-Z].*") && password.matches(".*[0-9].*") && password.matches(".*[!@#$%^&*()].*")) {
-          return true;
-     } else {
-          return false;
-     }
+        if (StoredPassword.length() <= 8 && StoredPassword.matches(".*[A-Z].*") && StoredPassword.matches(".*[0-9].*") && StoredPassword.matches(".*[!@#$%^&*()].*")) {
+            return true;
+        }
+        return false;
     }
 
     //Cell Phone Validation
-    
+    public boolean CheckCellPhone(){
+        if (StoredCellPhone.matches("\\+27\\d{9}$")) {
+            return true;
+        }
+        return false;
+    }
+
+    //Registration error messages for user
+    public String RegisterUser(){
+        if (!CheckUsername()){
+            return "Username is not correctly formatted.";
+        }
+        if (!CheckPassword()){
+            return "Password does not meet the complexity requirements";
+        }
+        if (!CheckCellPhone()){
+            return "Cell phone number incorrectly formatted or does not contain international code.";
+        }else {
+            return "Above conditions have been met. User successfully registered.";
+        }
+    }
+
+    //Login check
+    public boolean loginUser(String enteredUsername, String enteredPassword, String enteredCellPhone){
+        if (enteredUsername.equals(StoredUsername) && enteredPassword.equals(StoredPassword) && enteredCellPhone.equals(StoredCellPhone)){
+            return true;
+        }
+        return false;
+    }
 }

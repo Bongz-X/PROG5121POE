@@ -39,7 +39,7 @@ public class App
     String cellPhone = input.nextLine();
 
     //Validate cell phone number
-    if (cellPhone.matches("\\+27\\d{9}")) {
+    if (cellPhone.matches("\\+27\\d{9}$")) {
         System.out.println("Cell phone number successfully added.");
     } else {
         System.out.println("Cell phone number incorrectly formatted or does not contain international code.");
@@ -50,25 +50,24 @@ public class App
     //Storing login details in login object
     Login login = new Login(username, password, cellPhone);
 
-    System.out.println("--- LOGIN ---");
+    //Showing registration results to user
+    System.out.println(login.RegisterUser());
 
-    //User Logging In 
-    System.out.println("Please enter your username:");
-    String loginUsername = input.nextLine();
+    //Prompt user to enter login details
+    System.out.println("Please enter your username to login: ");
+    String enteredUsername = input.nextLine();
 
-    System.out.println("Please enter your password:");
-    String loginPassword = input.nextLine();
+    System.out.println("Please enter your password to login: ");
+    String enteredPassword = input.nextLine();
 
-    System.out.println("Please enter your cell phone number:");
-    String loginCellPhone = input.nextLine();
+    System.out.println("Please enter your cell phone number to login: ");
+    String enteredCellPhone = input.nextLine();
 
-    //Checking authentication of details
-    boolean isAuthenticated = login.authenticate(loginUsername, loginPassword, loginCellPhone);
-
-    //Validating login details
-    while (!isAuthenticated && attempts > 0){
-        System.out.println("")
+    //Validate login details
+    if (login.loginUser(enteredUsername, enteredPassword, enteredCellPhone)){
+        System.out.println("Welcome back, " + enteredUsername + "!");
+    } else {
+        System.out.println("Login failed. Please check your username, password, and cell phone number and try again.");
     }
-
   }
 }
