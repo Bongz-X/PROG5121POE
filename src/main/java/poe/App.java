@@ -6,68 +6,110 @@ public class App
     public static void main( String[] args )
     {
 
-    //Registration of User Details
+    //Registration of User details
     
     //Scanner to allow user input
-    Scanner input = new Scanner(System.in);
+    try (Scanner input = new Scanner(System.in)) {
+        Login user = null;
 
-    //Prompt user to enter username
-    System.out.println("Please enter your username (Contains _ and is a max of 5 characers long) ");
-    String username = input.nextLine();
+        //Menu to select registration or login
+        int choice;
+        do {
+            System.out.println("---Menu---");
+            System.out.println("Please select an option:");
+            System.out.println("1. Register");
+            System.out.println("2. Login");
+            System.out.println("3. Exit");
 
-    //Validate username
-    if (username.contains("_") && username.length() <= 5) {
-        System.out.println("Username successfully captured.");
-    } else {
-        System.out.println("Username is not correctly formatted; please ensure that it contains an underscore and is no more than five characters in length.");
+            choice= input.nextInt();
+            input.nextLine();
+
+            switch (choice){
+
+                //Registration Phase
+                case 1:
+                    System.out.println("Please enter your username (Contains _ and is a max of 5 characers long) ");
+                    String username = input.nextLine();
+
+                    System.out.println("Please enter your password (8 characters long, contains a capital letter, a number and a special character)");
+                    String password = input.nextLine();
+
+                    System.out.println("Please enter your SA cell phone number (Must start with +27 and be 10 characters long) ");
+                    String cellPhone = input.nextLine();
+
+                    user = new Login(username, password, cellPhone);
+
+                    //Showing registration results to user
+
+                    //Username
+                    if(user.CheckUsername()){
+                        System.out.println("Username successfully captured.");
+                    } else {
+                        System.out.println("Username is not correctly formatted; please ensure that it contains an underscore and is no more than five characters in length.");
+                    }
+
+                    //Password
+                    if(user.CheckPassword()){
+                        System.out.println("Password successfully captured.");
+                    } else {
+                        System.out.println("Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.");
+                    }
+
+                    //Cell Phone
+                    if(user.CheckCellPhone()){
+                        System.out.println("Cell phone number successfully captured.");
+                    } else {
+                        System.out.println("Cell phone number incorrectly formatted or does not contain international code.");
+                    }
+                    
+                    //Final registration result confriming details are correct and user is registered
+                    if (user.CheckUsername() && user.CheckPassword() && user.CheckCellPhone()) {
+                        System.out.println("Above conditions have been met. User successfully registered.");
+                    } else {
+                        System.out.println("Registration unsuccessful. Please check the requirements for each field and try again.");
+                    }
+                    break;
+
+
+                //Login Phase
+
+                //Letting user know they can't login without registering first
+                case 2:
+                    if (user == null){
+                        System.out.println("Register first before attempting to login!");
+                        break;
+                    }
+
+                //Prompt user to enter login details
+                System.out.println("Please enter your username to login: ");
+                String enteredUsername = input.nextLine();
+
+                System.out.println("Please enter your password to login: ");
+                String enteredPassword = input.nextLine();
+
+                System.out.println("Please enter your cell phone number to login: ");
+                String enteredCellPhone = input.nextLine();
+
+                //Login feedback to user
+                boolean loginSuccess = user.loginUser(enteredUsername, enteredPassword, enteredCellPhone);
+
+                if (loginSuccess){
+                    System.out.println("Welcome back, " + enteredUsername + "! It is great to see you again.");
+                } else {
+                    System.out.println("Login unsuccessful. Please check your credentials and try again.");
+                }
+
+                //Exit message
+                case 3:
+                    System.out.println("Thank you for using the system. Goodbye!");
+                    break;
+
+                //Default case for invalid menu option
+                default:
+                    System.out.println("Invalid option. Please select 1, 2, or 3.");
+
+            }
+        } while (choice != 3);
     }
-    
-
-    //Prompt user to enter password
-    System.out.println("Please enter your password (8 characters long, contains a capital letter, a number and a special character)");
-    String password = input.nextLine();
-
-    //Validate password
-    if (password.length() <= 8 && password.matches(".*[A-Z].*") && password.matches(".*[0-9].*") && password.matches(".*[!@#$%^&*()].*")) {
-        System.out.println("Password successfully captured.");
-    } else {
-        System.out.println("Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.");
     }
-
-    //Prompt user to enter SA cell phone no
-    System.out.println("Please enter your SA cell phone number (Must start with +27 and be 10 characters long) ");
-    String cellPhone = input.nextLine();
-
-    //Validate cell phone number
-    if (cellPhone.matches("\\+27\\d{9}$")) {
-        System.out.println("Cell phone number successfully added.");
-    } else {
-        System.out.println("Cell phone number incorrectly formatted or does not contain international code.");
-    }
-    
-    //Login Phase
-
-    //Storing login details in login object
-    Login login = new Login(username, password, cellPhone);
-
-    //Showing registration results to user
-    System.out.println(login.RegisterUser());
-
-    //Prompt user to enter login details
-    System.out.println("Please enter your username to login: ");
-    String enteredUsername = input.nextLine();
-
-    System.out.println("Please enter your password to login: ");
-    String enteredPassword = input.nextLine();
-
-    System.out.println("Please enter your cell phone number to login: ");
-    String enteredCellPhone = input.nextLine();
-
-    //Validate login details
-    if (login.loginUser(enteredUsername, enteredPassword, enteredCellPhone)){
-        System.out.println("Welcome back, " + enteredUsername + "!It is great to see you again.");
-    } else {
-        System.out.println("Login failed. Please check your username, password, and cell phone number and try again.");
-    }
-  }
 }

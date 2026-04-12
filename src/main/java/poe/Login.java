@@ -16,26 +16,17 @@ public class Login {
     
     //Username Validation
     public boolean CheckUsername(){
-        if (StoredUsername.contains("_") && StoredUsername.length() <= 5) {
-            return true;
-        }
-        return false;
+        return StoredUsername.contains("_") && StoredUsername.length() <= 5;
     }
 
     //Password Validation
     public boolean CheckPassword(){
-        if (StoredPassword.length() <= 8 && StoredPassword.matches(".*[A-Z].*") && StoredPassword.matches(".*[0-9].*") && StoredPassword.matches(".*[!@#$%^&*()].*")) {
-            return true;
-        }
-        return false;
+        return StoredPassword.length() >= 8 && StoredPassword.matches(".*[A-Z].*") && StoredPassword.matches(".*[0-9].*") && StoredPassword.matches(".*[!@#$%^&*()].*");
     }
 
     //Cell Phone Validation
     public boolean CheckCellPhone(){
-        if (StoredCellPhone.matches("\\+27\\d{9}$")) {
-            return true;
-        }
-        return false;
+       return StoredCellPhone.matches("\\+27\\d{9}$");
     }
 
     //Registration error messages for user
@@ -56,5 +47,20 @@ public class Login {
     //Login check
     public boolean loginUser(String enteredUsername, String enteredPassword, String enteredCellPhone){
         return enteredUsername.equals(StoredUsername) && enteredPassword.equals(StoredPassword) && enteredCellPhone.equals(StoredCellPhone);
+    }
+
+    //Results for letting user know which login detail was incorrect
+    public String LoginErrorMessage(String enteredUsername, String enteredPassword, String enteredCellPhone){
+        if (!enteredUsername.equals(StoredUsername)){
+            return "Username is incorrect.";
+        }
+        if (!enteredPassword.equals(StoredPassword)){
+            return "Password is incorrect.";
+        }
+        if (!enteredCellPhone.equals(StoredCellPhone)){
+            return "Cell phone number is incorrect.";
+        } else {
+            return "Login successful";
+        }
     }
 }
