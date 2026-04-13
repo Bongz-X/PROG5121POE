@@ -77,7 +77,7 @@ public class App
                     isValid = validUsername && validPassword && validCellPhone;
 
                     if (!isValid){
-                        System.out.println("Registration unsuccessful. Please ;check the requirements for each field and try again.");
+                        System.out.println("Registration unsuccessful. Please check the requirements for each field and try again.");
                     }
                 } while (!isValid);
 
@@ -91,7 +91,7 @@ public class App
                 //Letting user know they can't login without registering first
                 case 2:
                     if (user == null){
-                        System.out.println("Register first before attempting to login!");
+                        System.out.println("No user registered. Register first before attempting to login!");
                         break;
                     }
 
@@ -113,6 +113,7 @@ public class App
                 } else {
                     System.out.println("Login unsuccessful. Please check your credentials and try again.");
                 }
+                break;
 
                 //Exit message
                 case 3:
