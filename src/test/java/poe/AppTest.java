@@ -98,28 +98,36 @@ public class AppTest {
     @Test
     public void testUsernameCorrectlyFormatted() {
         Login user = new Login("kyl_1", "Password!", "+27456489787");
+        boolean result = user.CheckUsername();
+        System.out.println("Username Validation result: " + result);
 
-        assertTrue(user.CheckUsername());
+        assertTrue(result);
     }
+
     @Test
     public void testUsernameNotCorrectlyFormatted() {
         Login user = new Login("Kyle!!!!!!!", "Password!", "+27456489787");
+        boolean result = user.CheckUsername();
+        System.out.println("Username Validation result: " + result);
 
-        assertFalse(user.CheckUsername());
+        assertFalse(result);
     }
 
     //Password Tests
     @Test
     public void testPasswordMeetsComplexityRequirements() {
         Login user = new Login("kyl_1", "Ch&&sec@ke99!", "+27456489787");
+        boolean result = user.CheckPassword();
+        System.out.println("Password Validation result: " + result);
 
-        assertTrue(user.CheckPassword());
+        assertTrue(result);
     }
     @Test
     public void testPasswordDoesNotMeetComplexityRequirements() {
         Login user = new Login("kyl_1", "password", "+27456489787");
-
-        assertFalse(user.CheckPassword());
+        boolean result = user.CheckPassword();
+        System.out.println("Password Validation result: " + result);
+        assertFalse(result);
     }
 
     //Cell phone tests
@@ -127,12 +135,18 @@ public class AppTest {
     public void testCellPhoneCorrectlyFormatted() {
         Login user = new Login("kyl_1", "Password!", "+27838968976");
 
-        assertTrue(user.CheckCellPhone());
+        boolean result = user.CheckCellPhone();
+        System.out.println("Cell Phone Validation result: " + result);
+
+        assertTrue(result);
     }
     @Test
     public void testCellPhoneNotCorrectlyFormatted() {
         Login user = new Login("kyl_1", "Password!", "08966553");
+        boolean result = user.CheckCellPhone();
 
-        assertFalse(user.CheckCellPhone());
+        System.out.println("Cell Phone Validation result: " + result);
+
+        assertFalse(result);
     }
 }
