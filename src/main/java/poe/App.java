@@ -28,6 +28,11 @@ public class App
 
                 //Registration Phase
                 case 1:
+
+                //condition for registration loop
+                boolean isValid;
+
+                do { 
                     System.out.println("Please enter your username (Contains _ and is a max of 5 characers long) ");
                     String username = input.nextLine();
 
@@ -39,36 +44,46 @@ public class App
 
                     user = new Login(username, password, cellPhone);
 
+                    //Assigning methods from Login Class
+
+                    boolean validUsername = user.CheckUsername();
+                    boolean validPassword = user.CheckPassword();
+                    boolean validCellPhone = user.CheckCellPhone();
+
+
                     //Showing registration results to user
 
                     //Username
-                    if(user.CheckUsername()){
+                    if(validUsername){
                         System.out.println("Username successfully captured.");
                     } else {
                         System.out.println("Username is not correctly formatted; please ensure that it contains an underscore and is no more than five characters in length.");
                     }
 
                     //Password
-                    if(user.CheckPassword()){
+                    if(validPassword){
                         System.out.println("Password successfully captured.");
                     } else {
                         System.out.println("Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.");
                     }
 
                     //Cell Phone
-                    if(user.CheckCellPhone()){
+                    if(validCellPhone){
                         System.out.println("Cell phone number successfully captured.");
                     } else {
                         System.out.println("Cell phone number incorrectly formatted or does not contain international code.");
                     }
-                    
-                    //Final registration result confriming details are correct and user is registered
-                    if (user.CheckUsername() && user.CheckPassword() && user.CheckCellPhone()) {
-                        System.out.println("Above conditions have been met. User successfully registered.");
-                    } else {
-                        System.out.println("Registration unsuccessful. Please check the requirements for each field and try again.");
+                    //Check overall validation of registration details
+                    isValid = validUsername && validPassword && validCellPhone;
+
+                    if (!isValid){
+                        System.out.println("Registration unsuccessful. Please ;check the requirements for each field and try again.");
                     }
-                    break;
+                } while (!isValid);
+
+                //Final registration result confriming details are correct and user is registered
+                System.out.println("Above conditions have been met. User successfully registered.");
+                break;
 
 
                 //Login Phase
